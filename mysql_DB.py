@@ -1,5 +1,4 @@
 import mysql.connector
-from flask import jsonify
 
 '''
 mysqldump -u groot -p search_engine videos categories video_categories > "D:\\Code Space\\Projects\\Video Transcription\\SETUP\\DB_Backup.sql"
@@ -17,28 +16,27 @@ def search_video(search_tag:str):
         dbcursor = db.cursor()
         query = f"select file_path,file_name,category_name from search_engine.video_index where category_name like '%{search_tag}%';"
         dbcursor.execute(query)
-        result=dbcursor.fetchall()
-        
+        db_result=dbcursor.fetchall()
+        dbcursor.close()
         search_results = []
 
-        if result:
-            for item in result:
+        if db_result:
+            for item in db_result:
                 path, file_name, category_list = item
                 search_result = {
                     "file_path": path,
                     "file_name": file_name,
                     "category_list": category_list
                 }
-                search_results.append(search_result)
+                if file_name not in (i["file_name"] for i in search_results):
+                    search_results.append(search_result)
             
             
-            response = {
+            return {
                 "status": "SUCCESS",
                 "total_results": len(search_results),
                 "results": search_results
             }
-            
-            return jsonify(response)
         
         else:
             print("$$ No match Found")
@@ -50,6 +48,3 @@ def search_video(search_tag:str):
             "status": "ERROR",
             "error": error
             }
-
-
-# print(search_video("market"))
