@@ -1,6 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS
-from mysql_DB import search_video
+from search_query_parse import query_parser
 
 app = Flask(__name__)
 CORS(app)
@@ -23,7 +23,7 @@ def service_status():
 def search():
     if request.method == 'POST':
         search_query = request.form['search_query']
-        search_result = search_video(search_query)  
+        search_result = query_parser(search_query)  
         search_result["search_query"] = search_query
         print("Search: ",search_query)
 

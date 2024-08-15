@@ -28,12 +28,13 @@ def search_video(search_tag:str):
                     "file_name": file_name,
                     "category_list": category_list
                 }
-                if file_name not in (i["file_name"] for i in search_results):
+                if file_name not in (result["file_name"] for result in search_results):
                     search_results.append(search_result)
             
             
             return {
                 "status": "SUCCESS",
+                "tag": search_tag,
                 "total_results": len(search_results),
                 "results": search_results
             }

@@ -38,7 +38,7 @@ This repository contains a Flask-based web service for searching videos in a MyS
             "/search": {
                 "method": "[POST]",
                 "parameters": {
-                    "search": "search query"
+                    "search_query": "video tag / search query"
                 }
             }
         }
