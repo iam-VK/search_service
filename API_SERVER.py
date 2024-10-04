@@ -19,13 +19,11 @@ def service_status():
             }
         }
 
-@app.route("/search", methods=['POST'])
+@app.route("/search", methods=['GET'])
 def search():
-    if request.method == 'POST':
-        search_query = request.form['search_query']
-        search_result = query_parser(search_query)  
-        search_result["search_query"] = search_query
-        print("Search: ",search_query)
+    if request.method == 'GET':
+        search_query = request.args.get('query')
+        search_result = query_parser(search_query)
 
         return search_result
 
