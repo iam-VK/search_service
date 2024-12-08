@@ -14,7 +14,7 @@ db = mysql.connector.connect(
 def search_video(search_tag:str):
     try:
         dbcursor = db.cursor()
-        query = f'''select video_id,file_name,category_name from search_engine.video_index where category_name like "%{search_tag}%";'''
+        query = f'''select file_id,file_name,category_name from search_engine.video_index where category_name like "%{search_tag}%";'''
         dbcursor.execute(query)
         db_result=dbcursor.fetchall()
         dbcursor.close()
@@ -22,10 +22,10 @@ def search_video(search_tag:str):
 
         if db_result:
             for item in db_result:
-                video_id, file_name, category_list = item
+                file_id, file_name, category_list = item
                 search_result = {
                     "search_tag": search_tag,
-                    "video_id": video_id,
+                    "file_id": file_id,
                     "file_name": file_name,
                     "category_list": category_list,
                     "match_type":"vision"

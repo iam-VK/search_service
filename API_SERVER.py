@@ -11,9 +11,10 @@ def service_status():
         "status":'Alive',
             "endpoints": {
                 "/search": {
-                    "method":"[POST]",
+                    "method":"[GET]",
                     "parameters": {
-                        "search":"search query"
+                        "search":"search query",
+                        "file-type":"file type"
                     }
                 }
             }
@@ -23,6 +24,7 @@ def service_status():
 def search():
     if request.method == 'GET':
         search_query = request.args.get('query')
+        file_type = request.args.get('file-type')
         search_result = query_parser(search_query)
 
         return search_result

@@ -63,15 +63,15 @@ def query_parser(query):
             if len(mysql_result)>0:
                 mysql_flag = True
                 for result in mysql_result:
-                    if result["video_id"] not in result_vid_ids:
-                        result_vid_ids.add(result["video_id"])
+                    if result["file_id"] not in result_vid_ids:
+                        result_vid_ids.add(result["file_id"])
                         result['matching_tags'] = [result['search_tag']]
                         del result['search_tag']
                         search_results.append(result)
 
-                    elif result["video_id"] in result_vid_ids:
+                    elif result["file_id"] in result_vid_ids:
                         for ele in search_results:
-                            if result["video_id"] == ele["video_id"]:
+                            if result["file_id"] == ele["file_id"]:
 
                                 if result['search_tag'] not in ele['matching_tags']:
                                     ele['matching_tags'].append(result['search_tag'])
@@ -92,15 +92,15 @@ def query_parser(query):
             if len(elastic_result)>0:
                 elastic_flag = True
                 for result in elastic_result:
-                    if result["video_id"] not in result_vid_ids:
-                        result_vid_ids.add(result["video_id"])
+                    if result["file_id"] not in result_vid_ids:
+                        result_vid_ids.add(result["file_id"])
                         result['matching_tags'] = [result['search_tag']]
                         del result['search_tag']
                         search_results.append(result)
 
-                    elif result["video_id"] in result_vid_ids:
+                    elif result["file_id"] in result_vid_ids:
                         for ele in search_results:
-                            if result["video_id"] == ele["video_id"]:
+                            if result["file_id"] == ele["file_id"]:
 
                                 if result['search_tag'] not in ele['matching_tags']:
                                     ele['matching_tags'].append(result['search_tag'])

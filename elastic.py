@@ -23,13 +23,13 @@ def search_elastic(search_tag):
 
     if total_hits > 0:
         for hit in resp['hits']['hits']:
-          video_id = hit['_source']['video_id']
+          file_id = hit['_source']['video_id'] ##change video_id to file_id in elastic search db
           file_name = hit['_source']['file_name']
           _, file_name = file_name_extract(file_name)
           
           result = {
                       "search_tag": search_tag,
-                      "video_id": video_id,
+                      "file_id": file_id,
                       "file_name": file_name,
                       "match_type":"speech"
                   }
